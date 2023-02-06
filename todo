@@ -1,0 +1,36 @@
+""" # JSON to pandas DataFrame -- Rebotes 
+rebotes = pd.DataFrame()
+for issue in jira_issues_rebotes:
+    d = {
+        'id':    issue.id,
+        'key':   issue.key,
+        'self':  issue.self,
+        
+        'assignee':        str(issue.fields.assignee),
+        'creator' :        str(issue.fields.creator),
+        'reporter':        str(issue.fields.reporter),
+        'created' :        datetime.strptime(str(issue.fields.created)[0:10],'%Y-%m-%d').strftime("%V"),   
+        'labels':          str(issue.fields.labels),
+        'components':      str(issue.fields.components),
+        'description':     str(issue.fields.description),
+        'summary':         str(issue.fields.summary),
+        'fixVersions':     str(issue.fields.fixVersions),
+        'issuetype':       str(issue.fields.issuetype.name),
+        'priority':        str(issue.fields.priority.name),
+        'project':         str(issue.fields.project),
+        'resolution':      str(issue.fields.resolution),
+        'resolution_date': str(issue.fields.resolutiondate),
+        'status':          str(issue.fields.status.name),
+        'updated':         str(issue.fields.updated),
+        'versions':        str(issue.fields.versions),
+        'epic link':       str(issue.fields.customfield_10008),
+        'subtask':            str(issue.fields.issuetype.subtask),
+        'status_description': str(issue.fields.status.description),
+        'watchcount':         str(issue.fields.watches.watchCount),
+    }
+    rebotes = rebotes.append(d, ignore_index=True)    
+    
+# DataFrame to SQLite -- Rebotes
+con = sqlite3.connect("jira-rebotes.db")
+rebotes.to_sql("rebotes", con, if_exists="replace")
+con.close()  """
