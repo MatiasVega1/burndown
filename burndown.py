@@ -50,7 +50,7 @@ def cargarArray(jql):
     #rint("Ya paso el for")
     return  cantidad, puntos
 
-def obtenerTesteadoDesarrollado(dia, semanasParaAtras, web, mobile):    
+def obtenerTesteadoDesarrollado(dia, sprint, semanasParaAtras, web, mobile):    
     print("Arranco")
     cont = 0  
     proximo = dia
@@ -59,7 +59,7 @@ def obtenerTesteadoDesarrollado(dia, semanasParaAtras, web, mobile):
     row = 0
     col = 1 
     
-    workbook = xlsxwriter.Workbook('sprint91.xlsx')
+    workbook = xlsxwriter.Workbook('sprint' + sprint + '.xlsx')
 
     header = workbook.add_format({'bold': True, 'align': 'center', 'bg_color': '#D8E4BC'})
     center = workbook.add_format({'align': 'center'})
@@ -92,7 +92,7 @@ def obtenerTesteadoDesarrollado(dia, semanasParaAtras, web, mobile):
         col = 1
        
         for e in estados:
-            jql = 'project = RT AND Sprint = 555 and status was "' + e + '" ON "'+ y.strftime("%Y/%m/%d") + ' 19:00" and type IN ("Feature","Bug","Deuda Técnica")  ORDER BY issuetype DESC'
+            jql = 'project = RT AND Sprint = "RT Meli Sprint #' + sprint + '" and status was "' + e + '" ON "'+ y.strftime("%Y/%m/%d") + ' 19:00" and type IN ("Feature","Bug","Deuda Técnica")  ORDER BY issuetype DESC'
             
             cantTestWebRebote, puntosTestWebRebote = cargarArray(jql)
 
@@ -112,12 +112,12 @@ def obtenerTesteadoDesarrollado(dia, semanasParaAtras, web, mobile):
    
 # Settings
 email = 'matias.vega@real-trends.com'           # Jira username
-api_token = "G5phknze6w8msRq0kpjGC218"       # Jira API token
+api_token = "" 
 server = 'https://realtrends.atlassian.net/'     # Jira server URL 
 
 # Activo desde cuando quiero ejecutar el programa y cuantas semanas para atras quiero tomar el calculo
-semanas = dt.datetime(2023, 1, 23, 1, 0)  # Lo quiero ejecutar desde ahora 
+semanas = dt.datetime(2023, 2, 26, 1, 0)  # Lo quiero ejecutar desde ahora 
 #delta = timedelta(days=5) 
 #print(semanas.strftime("%Y/%m/%d"))
-obtenerTesteadoDesarrollado(semanas , 26 , True, True) 
+obtenerTesteadoDesarrollado(semanas , 92, 26 , True, True) 
 print("Termino")

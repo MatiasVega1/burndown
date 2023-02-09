@@ -169,7 +169,7 @@ def obtenerTesteadoDesarrollado(dia, semanasParaAtras, web, mobile):
    
 # Settings
 email = 'matias.vega@real-trends.com'           # Jira username
-api_token = "G5phknze6w8msRq0kpjGC218"       # Jira API token
+api_token = ""       # Jira API token
 server = 'https://realtrends.atlassian.net/'     # Jira server URL 
 
 # Activo desde cuando quiero ejecutar el programa y cuantas semanas para atras quiero tomar el calculo
